@@ -9,6 +9,7 @@
         <ul class="nav navbar-nav">
           <!--links-->
             <li routerLinkActive="active"><a [routerLink]="['/recipes']" >Recipes</a></li>
+            <li routerLinkActive="active"><a [routerLink]="['/auth']">Login | Signup</a></li>
             <li routerLinkActive="active"><a [routerLink]="['/shopping-list']">Shopping List</a></li>
         </ul>
 
@@ -22,7 +23,7 @@
                 <ul class="dropdown-menu">
                     <li><a style="cursor: pointer;" (click)="onSaveData()">Save Data</a></li>
                     <li><a style="cursor: pointer;" (click)="onFetchData()">Fetch Data</a></li>
-                </ul>
+               </ul>
             </li>
         </ul>
         </div>

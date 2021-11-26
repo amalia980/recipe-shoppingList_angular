@@ -4,7 +4,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { RecipeService } from "../recipes/recipe.service";
 import { Recipe } from "../recipes/recipe.model";
-import { map } from "rxjs/operators";
+import { map, tap } from "rxjs/operators";
 
 @Injectable({providedIn: 'root'})//this is an option for instead implementing in the providers of app.module.ts
 
@@ -25,20 +25,20 @@ export class DataStorageService {
   }
 
   fetchRecipes() {
-    this.http
+    return this.http
     .get<Recipe[]>(//we will will specify with <> what format the extracted response body will have, which is an "array" of recipes
       'https://recipe-and-shopping-list-app-default-rtdb.europe-west1.firebasedatabase.app/recipes.json')
+
       /*protection against errors of ingredients with pipe*/
-    .pipe(map(recipes => {//this "map" is an rxjs operator
+    .pipe(
+      map(recipes => {//this "map" is an rxjs operator
       return recipes.map(recipe => {//this map is not the same function as the top. recipes are calling the array. so this "map" is just a normal JS method
 
         return {...recipe, ingredients: recipe.ingredients ? recipe.ingredients : []};//return the transformed recipe or an empty array if the ingredients are "true"
       });
-    }))
-    .subscribe(
-      recipes => {
-        this.recipeService.setRecipes(recipes);
-      }
+    }), tap(recipes => {
+          this.recipeService.setRecipes(recipes);
+    })
     )
   }
 

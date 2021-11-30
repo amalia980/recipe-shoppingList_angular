@@ -1,4 +1,4 @@
-//authentication
+//check authentication
 
 import { Component } from "@angular/core";
 import { NgForm } from "@angular/forms";
@@ -19,7 +19,7 @@ export class AuthComponent {
   constructor(private authService: AuthService, private router: Router) { }
 
   onSwitchMode() {
-    this.isLoginMode = !this.isLoginMode;
+    this.isLoginMode = !this.isLoginMode;//switch from login to signup
   }
 
 onSubmit(form: NgForm) {

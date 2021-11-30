@@ -31,7 +31,7 @@ export class RecipeService {
   constructor(private slService: ShoppingListService) { }
 
   setRecipes(recipes: Recipe[]) {//overriding the Recipe[] thats array on top
-    this.recipes = recipes;
+    this.recipes = recipes;//shortcut
     this.recipesChanged.next(this.recipes.slice());
   }
 

@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { catchError, tap } from "rxjs/operators";
-import { Subject, throwError } from "rxjs";
+import { BehaviorSubject, throwError } from "rxjs";
 import { User } from "./user.model";
 
 export interface AuthResponseData {
@@ -18,8 +18,9 @@ export interface AuthResponseData {
 
 export class AuthService {
 
-  //store the authenticated user as a Subject
-  user = new Subject<User>();
+  //store the authenticated user as a BehaviourSubject, another type of subject
+  user = new BehaviorSubject<User>(null);//has to have a starting value, null for example
+  token: string = null;
 
   constructor(private http: HttpClient) { }
 

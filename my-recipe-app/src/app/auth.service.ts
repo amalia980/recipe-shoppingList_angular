@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { catchError, tap } from "rxjs/operators";
 import { BehaviorSubject, throwError } from "rxjs";
 import { User } from "./user.model";
+import { Router } from "@angular/router";
 
 export interface AuthResponseData {
   kind : string;
@@ -22,7 +23,7 @@ export class AuthService {
   user = new BehaviorSubject<User>(null);//has to have a starting value, null for example
   token: string = null;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   signUp(email: string, password: string) {//get API key from firebase project settings
     return this.http.post<AuthResponseData>('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key= AIzaSyDtfWW1ieSnF5Rmx8P5D2ktHHUgHFtwd5w',
@@ -68,6 +69,12 @@ export class AuthService {
         expirationDate
       );
       this.user.next(userData);
+  }
+
+  //logout option
+  logout() {
+    this.user.next(null);//set our user subject to null. make sure the app treats the user as unauthenticated
+    this.router.navigate(['/auth']);//redirect to auth, to make sure no matter how we are logged out we we always redirect the user. we are not stuck on some random component
   }
 
   //this is the actual method to handle the error. but the logic will be executed above. on line 29 and 40

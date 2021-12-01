@@ -1,0 +1,9 @@
+<div class="backdrop" (click)="onClose()"><!--blocks access to rest of the page, it will look like an overlay-->
+</div>
+
+<div class="alert-box">
+  <p>{{ message }}</p>
+  <div class="alert-box-actions">
+    <button class="btn btn-danger" (click)="onClose()">Close</button>
+  </div>
+</div>

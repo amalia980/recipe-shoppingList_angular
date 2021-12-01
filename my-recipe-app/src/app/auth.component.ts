@@ -62,6 +62,8 @@ onSubmit(form: NgForm) {
   form.reset();
   }
 
-
+  onCloseAlert() {
+    this.errorMsg = null;//resetting the error, if it did not exist we can close it
+  }
 
 }

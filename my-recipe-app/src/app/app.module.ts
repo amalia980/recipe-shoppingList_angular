@@ -22,6 +22,7 @@ import { RecipeService } from './recipes/recipe.service';
 import { AuthComponent } from './auth.component';
 import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
 import { AuthInterceptorService } from './shared/auth-interceptor.service';
+import { AlertComponent } from './shared/alert/alert.component';
 
 const appRoutes: Routes = [
   { path: 'recipes', component: RecipesComponent },
@@ -43,7 +44,8 @@ const appRoutes: Routes = [
     RecipeStartComponent,
     RecipeEditComponent,
     AuthComponent,
-    LoadingSpinnerComponent
+    LoadingSpinnerComponent,
+    AlertComponent
   ],
   imports: [
     BrowserModule,

@@ -1,6 +1,7 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 import { AuthComponent } from "./auth.component";
+import { AuthGuard } from "./auth.guard";
 import { RecipeDetailComponent } from "./recipes/recipe-detail/recipe-detail.component";
 import { RecipeEditComponent } from "./recipes/recipe-edit/recipe-edit.component";
 import { RecipeStartComponent } from "./recipes/recipe-start/recipe-start.component";
@@ -13,6 +14,7 @@ const appRoutes: Routes = [
   { path: '', redirectTo: '/recipes', pathMatch: 'full'},
   {
     path: 'recipes', component: RecipesComponent,
+    canActivate: [AuthGuard],//protection. cannot access the page in any way without login
     children: [
       { path: '', component: RecipeStartComponent },
       { path: 'new', component: RecipeEditComponent},

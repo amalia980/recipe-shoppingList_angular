@@ -32,7 +32,7 @@ const appRoutes: Routes = [
 ];
 
 @NgModule({
-  declarations: [
+  declarations: [//the class name elements
     AppComponent,
     HeaderComponent,
     RecipesComponent,
@@ -49,14 +49,16 @@ const appRoutes: Routes = [
     AlertComponent,
     PlaceHolderDirective
   ],
-  imports: [
+  imports: [//let us import other modules
     BrowserModule,
-    AppRoutingModule,
+    AppRoutingModule,//our created module
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule
   ],
-  providers: [ShoppingListService, RecipeService,
+  providers: [//any service you plan on being injected needs to be provided. also a new a way to do this directly in the ts file @Injectable({providedIn: 'root'})
+    ShoppingListService,
+    RecipeService,
 
   {
     provide: HTTP_INTERCEPTORS,
@@ -64,7 +66,8 @@ const appRoutes: Routes = [
     multi: true//to allow mulitple interceptors
   }
 ],
-  bootstrap: [AppComponent],//is not bootstrap styling
+  bootstrap: [AppComponent],//is not bootstrap styling. it defines which components is available right in that index.html file. typically there is one component. so this is the root component <app-root></app-root> in index.html
+
   entryComponents: []//you wont need this for version angular 9 or higher. the entry components will emit by default
 })
 export class AppModule { }

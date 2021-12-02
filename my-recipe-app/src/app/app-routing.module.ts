@@ -34,9 +34,9 @@ const appRoutes: Routes = [
   { path: 'auth', component: AuthComponent}
 ];
 
-@NgModule({
+@NgModule({//app routing module imports the router module that angular offers.
   imports: [RouterModule.forRoot(appRoutes)],
-  exports: [RouterModule]
+  exports: [RouterModule]//export the routerModule from the app routing module so its not only avaible in this module but also in the app routing module
 
 })
 

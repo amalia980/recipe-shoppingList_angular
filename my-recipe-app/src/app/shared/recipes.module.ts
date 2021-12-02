@@ -10,6 +10,7 @@ import { RecipeDetailComponent } from "../recipes/recipe-detail/recipe-detail.co
 import { RecipeItemComponent } from "../recipes/recipe-list/recipe-item/recipe-item.component";
 import { RecipeStartComponent } from "../recipes/recipe-start/recipe-start.component";
 import { RecipeEditComponent } from "../recipes/recipe-edit/recipe-edit.component";
+import { RecipesRoutingModule } from "./recipes-routing.module";
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import { RecipeEditComponent } from "../recipes/recipe-edit/recipe-edit.componen
     RouterModule,
     CommonModule,//get access to *ngFor and *ngIf
     ReactiveFormsModule,
+    RecipesRoutingModule
   ],
   exports: [//now we can use all these components in our other modules that imports the recipe module
     RecipesComponent,

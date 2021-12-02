@@ -4,8 +4,12 @@
     <!-- <div class="alert alert-danger" *ngIf="errorMsg">
       <p>{{ errorMsg }}</p>
     </div> -->
-    <app-alert [message]="errorMsg" *ngIf="errorMsg" (close)="onCloseAlert()"></app-alert>
+    <!-- <app-alert [message]="errorMsg" *ngIf="errorMsg" (close)="onCloseAlert()"></app-alert> -->
     <!--show spinner if loading-->
+
+    <!--show error message programmatically dynamic component-->
+<ng-template appPlaceholder></ng-template>
+
     <div *ngIf="isLoading" style="text-align: center;">
       <app-loading-spinner></app-loading-spinner>
     </div>

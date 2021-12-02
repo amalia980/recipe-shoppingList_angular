@@ -1,22 +1,31 @@
 //check authentication
 
-import { Component } from "@angular/core";
+import { Component, ComponentFactoryResolver, OnDestroy, ViewChild } from "@angular/core";
 import { NgForm } from "@angular/forms";
 import { Router } from "@angular/router";
-import { Observable } from "rxjs";
+import { Observable, Subscription } from "rxjs";
 import { AuthService, AuthResponseData } from "./auth.service";
+import { AlertComponent } from "./shared/alert/alert.component";
+import { PlaceHolderDirective } from "./shared/placeholder/placeholder.directive";
 
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html'
 })
 
-export class AuthComponent {
+export class AuthComponent implements OnDestroy{
   isLoginMode = true;
   isLoading = false;//for loading spinner
   errorMsg: string = null;//because in the beginning there is no error
+  @ViewChild(PlaceHolderDirective, {static: false}) alertHost: PlaceHolderDirective;//alertHost is a place where we host our alert,  and its the type of PlaceholderDirective. so we get access to that directive we use in the template and we store that in alertHost
 
-  constructor(private authService: AuthService, private router: Router) { }
+  private closeSub: Subscription;//close the alert box button
+
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private componentFactoryResolver: ComponentFactoryResolver
+    ) { }
 
   onSwitchMode() {
     this.isLoginMode = !this.isLoginMode;//switch from login to signup
@@ -55,6 +64,9 @@ onSubmit(form: NgForm) {
     }, errorMessage => {
       console.log(errorMessage);
       this.errorMsg = errorMessage;
+
+      //new method showing error
+      this.showErrorAlert(errorMessage);
       this.isLoading = false;
   }
 );
@@ -62,8 +74,36 @@ onSubmit(form: NgForm) {
   form.reset();
   }
 
+  //close the box the error message at login
   onCloseAlert() {
     this.errorMsg = null;//resetting the error, if it did not exist we can close it
   }
+
+  //close the box the error message at login. make sure to unsubscribe the process. nothing should be rendering in the background
+  ngOnDestroy() {
+    if (this.closeSub) {//check if there is an active close subscription
+      this.closeSub.unsubscribe();
+    }
+  }
+
+
+  //show the error message login programmatically instead. within the code
+
+  private showErrorAlert(message: string) {
+    const alertCpmFactory = this.componentFactoryResolver.resolveComponentFactory(AlertComponent);//pass the type of the component
+
+    const hostViewContainerRef = this.alertHost.viewContainerRef;
+    hostViewContainerRef.clear();//clear anything that might have been rendered there before
+
+    const componentRef = hostViewContainerRef.createComponent(alertCpmFactory);//this will create a new component in the alertCmpfactory
+
+    componentRef.instance.message = message;//get properties from AlertComponent which are, close and message. now the error message text will be shown
+
+    this.closeSub = componentRef.instance.close.subscribe(() => {//close method emitter
+      this.closeSub.unsubscribe();
+      hostViewContainerRef.clear();
+    })
+  }
+
 
 }

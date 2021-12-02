@@ -23,6 +23,7 @@ import { AuthComponent } from './auth.component';
 import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
 import { AuthInterceptorService } from './shared/auth-interceptor.service';
 import { AlertComponent } from './shared/alert/alert.component';
+import { PlaceHolderDirective } from './shared/placeholder/placeholder.directive';
 
 const appRoutes: Routes = [
   { path: 'recipes', component: RecipesComponent },
@@ -45,7 +46,8 @@ const appRoutes: Routes = [
     RecipeEditComponent,
     AuthComponent,
     LoadingSpinnerComponent,
-    AlertComponent
+    AlertComponent,
+    PlaceHolderDirective
   ],
   imports: [
     BrowserModule,
@@ -62,6 +64,7 @@ const appRoutes: Routes = [
     multi: true//to allow mulitple interceptors
   }
 ],
-  bootstrap: [AppComponent]//is not bootstrap styling
+  bootstrap: [AppComponent],//is not bootstrap styling
+  entryComponents: []//you wont need this for version angular 9 or higher. the entry components will emit by default
 })
 export class AppModule { }

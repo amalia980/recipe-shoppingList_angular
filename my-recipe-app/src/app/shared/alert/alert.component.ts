@@ -1,4 +1,4 @@
-//another way to display the error messages during the login. with DYNAMIC COMPONENTS, this will act as an dynamic component, it means it will not always be there(shows). an alert box wih the error message inside. it will look like an overlay on the entire screen.
+//another way to display the error messages during the login. with DYNAMIC COMPONENTS, this will act as an dynamic component, it means it will not always be there(shows). an alert box wih the error message inside. it will look like an overlay on the entire screen. without HTML tags
 
 import { Component, Input, Output, EventEmitter } from "@angular/core";
 

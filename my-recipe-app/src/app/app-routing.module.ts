@@ -1,6 +1,5 @@
 import { NgModule } from "@angular/core";
-import { Routes, RouterModule } from "@angular/router";
-import { AuthModule } from "./recipes/auth.module";
+import { Routes, RouterModule, PreloadAllModules } from "@angular/router";
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/recipes', pathMatch: 'full'},
@@ -12,7 +11,7 @@ const appRoutes: Routes = [
 ];
 
 @NgModule({//app routing module imports the router module that angular offers.
-  imports: [RouterModule.forRoot(appRoutes)],
+  imports: [RouterModule.forRoot(appRoutes, {preloadingStrategy: PreloadAllModules})],
   exports: [RouterModule]//export the routerModule from the app routing module so its not only avaible in this module but also in the app routing module
 
 })

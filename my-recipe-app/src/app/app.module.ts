@@ -9,12 +9,11 @@ import { HeaderComponent } from './header/header.component';
 import { RecipesComponent } from './recipes/recipes.component';
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { AppRoutingModule } from './app-routing.module';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AuthComponent } from './auth.component';
 import { RecipesModule } from './shared/recipes.module';
 import { ShoppingListModule } from './shopping-list/shopping-list.module';
 import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core.module';
+import { AuthModule } from './recipes/auth.module';
 
 const appRoutes: Routes = [
   { path: 'recipes', component: RecipesComponent },
@@ -26,16 +25,14 @@ const appRoutes: Routes = [
   declarations: [//the class name elements
     AppComponent,
     HeaderComponent,
-    AuthComponent,
   ],
   imports: [//let us import other modules
     BrowserModule,
     AppRoutingModule,//our created module
-    FormsModule,
     HttpClientModule,
-    ReactiveFormsModule,
     RecipesModule,
     ShoppingListModule,
+    AuthModule,
     SharedModule,
     CoreModule//the services
   ],

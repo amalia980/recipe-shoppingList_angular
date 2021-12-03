@@ -9,7 +9,6 @@ import { HeaderComponent } from './header/header.component';
 import { RecipesComponent } from './recipes/recipes.component';
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { AppRoutingModule } from './app-routing.module';
-import { RecipesModule } from './shared/recipes.module';
 import { ShoppingListModule } from './shopping-list/shopping-list.module';
 import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core.module';
@@ -30,7 +29,6 @@ const appRoutes: Routes = [
     BrowserModule,
     AppRoutingModule,//our created module
     HttpClientModule,
-    RecipesModule,
     ShoppingListModule,
     AuthModule,
     SharedModule,

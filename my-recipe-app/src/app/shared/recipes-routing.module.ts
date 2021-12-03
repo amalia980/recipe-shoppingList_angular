@@ -9,7 +9,8 @@ import { RecipesComponent } from "../recipes/recipes.component";
 
 const routes: Routes = [
   {
-    path: 'recipes', component: RecipesComponent,
+    path: '',
+    component: RecipesComponent,
     canActivate: [AuthGuard],//protection. cannot access the page in any way without login
     children: [
       { path: '', component: RecipeStartComponent },
